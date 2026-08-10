@@ -1,0 +1,333 @@
+{
+  "traceability": {
+    "requirements": 12,
+    "covered": 11,
+    "gaps": [
+      {
+        "requirement": "REQ-012",
+        "statement": "A metric definition change publishes its blast radius",
+        "reason": "no test declared"
+      }
+    ],
+    "coverage_pct": 91.7,
+    "matrix": [
+      {
+        "requirement": "REQ-001",
+        "statement": "Every business metric has exactly one definition",
+        "specification": "platform/semantic/metrics.py::Registry.add_metric",
+        "tests": [
+          "test_a_metric_cannot_be_defined_twice"
+        ],
+        "tests_found": [
+          "test_a_metric_cannot_be_defined_twice"
+        ],
+        "tests_missing": [],
+        "covered": true
+      },
+      {
+        "requirement": "REQ-002",
+        "statement": "A query may not reference an undeclared dimension",
+        "specification": "platform/semantic/metrics.py::Metric.compile",
+        "tests": [
+          "test_unknown_dimension_is_rejected"
+        ],
+        "tests_found": [
+          "test_unknown_dimension_is_rejected"
+        ],
+        "tests_missing": [],
+        "covered": true
+      },
+      {
+        "requirement": "REQ-003",
+        "statement": "A query may not reference an undefined metric",
+        "specification": "platform/semantic/metrics.py::Registry.get",
+        "tests": [
+          "test_unknown_metric_is_rejected"
+        ],
+        "tests_found": [
+          "test_unknown_metric_is_rejected"
+        ],
+        "tests_missing": [],
+        "covered": true
+      },
+      {
+        "requirement": "REQ-004",
+        "statement": "Ratio metrics equal numerator divided by denominator",
+        "specification": "platform/semantic/metrics.py::Metric.compile",
+        "tests": [
+          "test_ratio_equals_numerator_over_denominator"
+        ],
+        "tests_found": [
+          "test_ratio_equals_numerator_over_denominator"
+        ],
+        "tests_missing": [],
+        "covered": true
+      },
+      {
+        "requirement": "REQ-005",
+        "statement": "Dimensional slices reconcile to the reported total",
+        "specification": "platform/warehouse/build_warehouse.py::vw_member_month",
+        "tests": [
+          "test_dimensional_slices_reconcile_on_the_numerator"
+        ],
+        "tests_found": [
+          "test_dimensional_slices_reconcile_on_the_numerator"
+        ],
+        "tests_missing": [],
+        "covered": true
+      },
+      {
+        "requirement": "REQ-006",
+        "statement": "Member-months equal the sum of enrolment durations (no fan-out)",
+        "specification": "platform/warehouse/build_warehouse.py::vw_member_month",
+        "tests": [
+          "test_member_months_equal_the_sum_of_enrolment_durations"
+        ],
+        "tests_found": [
+          "test_member_months_equal_the_sum_of_enrolment_durations"
+        ],
+        "tests_missing": [],
+        "covered": true
+      },
+      {
+        "requirement": "REQ-007",
+        "statement": "Member-months with zero claims remain in the denominator",
+        "specification": "platform/warehouse/build_warehouse.py::dim_month spine",
+        "tests": [
+          "test_zero_claim_member_months_stay_in_the_denominator"
+        ],
+        "tests_found": [
+          "test_zero_claim_member_months_stay_in_the_denominator"
+        ],
+        "tests_missing": [],
+        "covered": true
+      },
+      {
+        "requirement": "REQ-008",
+        "statement": "Censored members do not reduce estimated survival",
+        "specification": "analytics/survival/member_survival.py::kaplan_meier",
+        "tests": [
+          "test_censored_observations_do_not_drop_survival",
+          "test_censoring_changes_the_estimate"
+        ],
+        "tests_found": [
+          "test_censored_observations_do_not_drop_survival",
+          "test_censoring_changes_the_estimate"
+        ],
+        "tests_missing": [],
+        "covered": true
+      },
+      {
+        "requirement": "REQ-009",
+        "statement": "Survival estimates are independent of input row order",
+        "specification": "analytics/survival/member_survival.py::cox_ph",
+        "tests": [
+          "test_cox_is_invariant_to_row_order"
+        ],
+        "tests_found": [
+          "test_cox_is_invariant_to_row_order"
+        ],
+        "tests_missing": [],
+        "covered": true
+      },
+      {
+        "requirement": "REQ-010",
+        "statement": "E/M coding intensity is strictly ordered",
+        "specification": "platform/ingest/domain.py::EM_INTENSITY",
+        "tests": [
+          "test_em_intensity_is_strictly_ordered"
+        ],
+        "tests_found": [
+          "test_em_intensity_is_strictly_ordered"
+        ],
+        "tests_missing": [],
+        "covered": true
+      },
+      {
+        "requirement": "REQ-011",
+        "statement": "Reported loss ratio falls within a plausible band",
+        "specification": "platform/semantic/metrics.py::loss_ratio",
+        "tests": [
+          "test_loss_ratio_is_in_a_plausible_band"
+        ],
+        "tests_found": [
+          "test_loss_ratio_is_in_a_plausible_band"
+        ],
+        "tests_missing": [],
+        "covered": true
+      },
+      {
+        "requirement": "REQ-012",
+        "statement": "A metric definition change publishes its blast radius",
+        "specification": "integrity/metric_regression.py",
+        "tests": [],
+        "tests_found": [],
+        "tests_missing": [],
+        "covered": false
+      }
+    ],
+    "note": "REQ-012 has no test and is listed as a gap rather than removed from the register. A traceability matrix that only contains the requirements you happened to test is a list of tests, not a matrix."
+  },
+  "audit_trail": {
+    "entries": 4,
+    "chain_intact": true,
+    "tamper_detected": true,
+    "tamper_detected_at_seq": 1,
+    "note": "an entry was edited after the fact and the chain caught it; a plain log would have accepted the edit silently",
+    "entries_detail": [
+      {
+        "seq": 0,
+        "actor": "pipeline",
+        "action": "metric_definition_change",
+        "subject": "loss_ratio",
+        "detail": "excluded pharmacy; 33 historical figures moved",
+        "recorded_at": "2026-01-01T00:00:00Z",
+        "prev_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+        "hash": "88e431d9d4bba8cb2e46dc894deaa8cb5c6f40456b943c7264f28d0fbac084e8"
+      },
+      {
+        "seq": 1,
+        "actor": "pipeline",
+        "action": "model_promoted",
+        "subject": "risk_adjustment.ridge",
+        "detail": "calibration slope 1.0418, within the 0.9-1.1 band",
+        "recorded_at": "2026-01-01T00:00:00Z",
+        "prev_hash": "88e431d9d4bba8cb2e46dc894deaa8cb5c6f40456b943c7264f28d0fbac084e8",
+        "hash": "5bd82ee845ec437a503c98acf8b64f80fd3ee6942771c86922d245ad17c88155"
+      },
+      {
+        "seq": 2,
+        "actor": "investigator",
+        "action": "provider_flagged",
+        "subject": "NPI3000xxx",
+        "detail": "peer intensity z > 2.5 within specialty",
+        "recorded_at": "2026-01-01T00:00:00Z",
+        "prev_hash": "5bd82ee845ec437a503c98acf8b64f80fd3ee6942771c86922d245ad17c88155",
+        "hash": "e1f5a4863011c2bc44b8768424edb74b14f84281caa831d717e060a30fc0b43a"
+      },
+      {
+        "seq": 3,
+        "actor": "pipeline",
+        "action": "copilot_refusal",
+        "subject": "member SSN request",
+        "detail": "outside the governed vocabulary",
+        "recorded_at": "2026-01-01T00:00:00Z",
+        "prev_hash": "e1f5a4863011c2bc44b8768424edb74b14f84281caa831d717e060a30fc0b43a",
+        "hash": "6d8780cf666d663f6647bf0164962e1e5b340fea3d67a3404947e7dbc1876374"
+      }
+    ]
+  },
+  "injected_bugs": {
+    "injected": 10,
+    "caught": 7,
+    "survived": 3,
+    "detection_rate": 0.7,
+    "survivors": [
+      {
+        "bug": "km_wrong_risk_set",
+        "breaks": "the at-risk denominator never shrinks"
+      },
+      {
+        "bug": "member_month_spine_dropped",
+        "breaks": "zero-claim member-months vanish, inflating PMPM"
+      },
+      {
+        "bug": "denominator_fanout",
+        "breaks": "exposure join fans out, adding member-months that never existed"
+      }
+    ],
+    "stale": 0,
+    "detail": [
+      {
+        "bug": "ratio_inverted",
+        "file": "platform/semantic/metrics.py",
+        "applied": true,
+        "breaks": "loss ratio computed upside down",
+        "caught": true,
+        "exit_code": 1,
+        "evidence": "1 failed, 5 passed in 14.22s"
+      },
+      {
+        "bug": "duplicate_metric_allowed",
+        "file": "platform/semantic/metrics.py",
+        "applied": true,
+        "breaks": "a metric can be silently redefined, defeating the whole layer",
+        "caught": true,
+        "exit_code": 2,
+        "evidence": "1 error in 2.50s"
+      },
+      {
+        "bug": "unknown_dimension_ignored",
+        "file": "platform/semantic/metrics.py",
+        "applied": true,
+        "breaks": "an undeclared dimension is silently dropped instead of rejected",
+        "caught": true,
+        "exit_code": 1,
+        "evidence": "1 failed in 13.02s"
+      },
+      {
+        "bug": "km_ignores_censoring",
+        "file": "analytics/survival/member_survival.py",
+        "applied": true,
+        "breaks": "Kaplan-Meier treats censored members as events",
+        "caught": true,
+        "exit_code": 1,
+        "evidence": "1 failed, 14 passed in 15.06s"
+      },
+      {
+        "bug": "km_wrong_risk_set",
+        "file": "analytics/survival/member_survival.py",
+        "applied": true,
+        "breaks": "the at-risk denominator never shrinks",
+        "caught": false,
+        "exit_code": 0,
+        "evidence": "21 passed in 12.54s"
+      },
+      {
+        "bug": "cox_drops_censored_from_risk_set",
+        "file": "analytics/survival/member_survival.py",
+        "applied": true,
+        "breaks": "Breslow ties handled wrong, so tied event times use different risk sets",
+        "caught": true,
+        "exit_code": 1,
+        "evidence": "1 failed, 18 passed in 15.78s"
+      },
+      {
+        "bug": "month_off_by_one",
+        "file": "platform/ingest/domain.py",
+        "applied": true,
+        "breaks": "month labels shift by one, silently misdating every report",
+        "caught": true,
+        "exit_code": 1,
+        "evidence": "1 failed, 11 passed in 18.78s"
+      },
+      {
+        "bug": "em_intensity_unordered",
+        "file": "platform/ingest/domain.py",
+        "applied": true,
+        "breaks": "coding intensity order scrambled, so upcoding z-scores are meaningless",
+        "caught": true,
+        "exit_code": 1,
+        "evidence": "1 failed, 20 passed in 14.16s"
+      },
+      {
+        "bug": "member_month_spine_dropped",
+        "file": "platform/warehouse/build_warehouse.py",
+        "applied": true,
+        "breaks": "zero-claim member-months vanish, inflating PMPM",
+        "caught": false,
+        "exit_code": 0,
+        "evidence": "21 passed in 13.07s"
+      },
+      {
+        "bug": "denominator_fanout",
+        "file": "platform/warehouse/build_warehouse.py",
+        "applied": true,
+        "breaks": "exposure join fans out, adding member-months that never existed",
+        "caught": false,
+        "exit_code": 0,
+        "evidence": "21 passed in 16.13s"
+      }
+    ]
+  }
+}

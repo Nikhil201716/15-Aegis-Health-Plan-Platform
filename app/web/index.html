@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aegis — Health Plan Intelligence</title>
+<link rel="stylesheet" href="assets/css/app.css">
+<script src="assets/vendor/plotly-2.35.2.min.js" charset="utf-8"></script>
+</head>
+<body>
+<aside class="rail">
+  <div class="logo">Aegis <span>Health Plan</span></div>
+  <div class="tagline">Governed analytics for a payer</div>
+  <div class="nav-item active" data-ws="overview"><span class="ic">◆</span> Overview</div>
+  <div class="nav-item" data-ws="metrics"><span class="ic">▤</span> Metrics Explorer</div>
+  <div class="nav-item" data-ws="members"><span class="ic">◈</span> Member Retention</div>
+  <div class="nav-item" data-ws="planning"><span class="ic">▦</span> Forecasting</div>
+  <div class="nav-item" data-ws="integrity"><span class="ic">⚠</span> Integrity</div>
+  <div class="nav-item" data-ws="risk"><span class="ic">⚕</span> Risk Adjustment</div>
+  <div class="nav-item" data-ws="validation"><span class="ic">⚖</span> Validation</div>
+  <div class="rail-foot">
+    Every figure is compiled from one governed definition, so two screens
+    cannot disagree about the same number.
+  </div>
+</aside>
+<main>
+  <div class="topbar">
+    <div><h1 id="page-title">Overview</h1>
+      <p class="sub">Aegis Health Plan — 24,000 members, 24 months, one semantic layer</p></div>
+    <div class="spacer"></div><button class="btn ghost" id="theme">☀️</button>
+  </div>
+
+  <section class="ws" id="ws-overview">
+    <div class="kpis" id="ov-kpis"></div>
+    <div class="panel"><h3>What this platform is</h3><div id="ov-note"></div></div>
+  </section>
+
+  <section class="ws hidden" id="ws-metrics">
+    <div class="panel">
+      <h3>Governed metric explorer</h3>
+      <p class="hint">Pick a metric and a dimension. The SQL is compiled from the
+        definition — you cannot express a variant of it.</p>
+      <div class="io">
+        <label>Metric</label><select id="mx-metric"></select>
+        <label>By</label><select id="mx-dim"></select>
+        <button class="btn" id="mx-btn">Run</button>
+      </div>
+      <div class="chart" id="mx-chart"></div>
+      <pre class="out" id="mx-sql">—</pre>
+    </div>
+    <div class="panel"><h3>The catalogue</h3><div id="mx-catalog"></div></div>
+  </section>
+
+  <section class="ws hidden" id="ws-members">
+    <div class="kpis" id="sv-kpis"></div>
+    <div class="grid2">
+      <div class="panel"><h3>Survival by acquisition channel</h3>
+        <p class="hint">Kaplan-Meier. Censored members leave the risk set without counting as events.</p>
+        <div class="chart" id="sv-chart"></div></div>
+      <div class="panel"><h3>Which estimator recovers the truth?</h3>
+        <div id="sv-table"></div></div>
+    </div>
+  </section>
+
+  <section class="ws hidden" id="ws-planning">
+    <div class="panel"><h3>Forecast reconciliation</h3>
+      <p class="hint">Independent forecasts do not add up. Every method below fixes that; only some improve accuracy.</p>
+      <div class="chart" id="fc-chart"></div><div id="fc-note"></div></div>
+  </section>
+
+  <section class="ws hidden" id="ws-integrity">
+    <div class="grid2">
+      <div class="panel"><h3>Upcoding detection under attack</h3>
+        <div class="chart" id="fr-chart"></div><div id="fr-note"></div></div>
+      <div class="panel"><h3>Definition change blast radius</h3>
+        <div id="gv-note"></div></div>
+    </div>
+  </section>
+
+  <section class="ws hidden" id="ws-risk">
+    <div class="panel"><h3>Calibration, not just ranking</h3>
+      <p class="hint">A model that ranks well but is miscalibrated prices every contract wrong.</p>
+      <div class="chart" id="rk-chart"></div><div id="rk-note"></div></div>
+    <div class="panel"><h3>Model comparison</h3><div id="rk-table"></div></div>
+  </section>
+
+  <section class="ws hidden" id="ws-validation">
+    <div class="panel"><h3>Requirement traceability</h3><div id="vl-matrix"></div></div>
+    <div class="grid2">
+      <div class="panel"><h3>Injected-defect detection</h3><div id="vl-bugs"></div></div>
+      <div class="panel"><h3>NL copilot vs keyword rules</h3><div id="vl-copilot"></div></div>
+    </div>
+  </section>
+</main>
+<script src="assets/js/app.js"></script>
+</body>
+</html>

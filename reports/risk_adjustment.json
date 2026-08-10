@@ -1,0 +1,306 @@
+{
+  "n_members": 12183,
+  "split": "features from months 0-11, target from months 12+",
+  "why_time_split": "a random split over member-months lets a member's later cost inform their earlier features; cost is highly autocorrelated so every metric inflates",
+  "models": [
+    {
+      "model": "mean_baseline",
+      "spearman_rank_correlation": null,
+      "top_decile_lift": 1.066,
+      "r2": -0.0,
+      "mae": 2862.23,
+      "calibration_slope": null,
+      "calibration_intercept": 3831.53,
+      "well_calibrated": false,
+      "aggregate_payment_error_pct": -0.068,
+      "calibration_by_decile": [
+        {
+          "decile": 1,
+          "n": 366,
+          "mean_predicted": 3831.53,
+          "mean_actual": 3873.54,
+          "ratio": 0.9892
+        },
+        {
+          "decile": 2,
+          "n": 366,
+          "mean_predicted": 3831.53,
+          "mean_actual": 3894.0,
+          "ratio": 0.984
+        },
+        {
+          "decile": 3,
+          "n": 366,
+          "mean_predicted": 3831.53,
+          "mean_actual": 3838.27,
+          "ratio": 0.9982
+        },
+        {
+          "decile": 4,
+          "n": 366,
+          "mean_predicted": 3831.53,
+          "mean_actual": 3891.2,
+          "ratio": 0.9847
+        },
+        {
+          "decile": 5,
+          "n": 366,
+          "mean_predicted": 3831.53,
+          "mean_actual": 3901.7,
+          "ratio": 0.982
+        },
+        {
+          "decile": 6,
+          "n": 365,
+          "mean_predicted": 3831.53,
+          "mean_actual": 3804.11,
+          "ratio": 1.0072
+        },
+        {
+          "decile": 7,
+          "n": 365,
+          "mean_predicted": 3831.53,
+          "mean_actual": 3956.38,
+          "ratio": 0.9684
+        },
+        {
+          "decile": 8,
+          "n": 365,
+          "mean_predicted": 3831.53,
+          "mean_actual": 3537.32,
+          "ratio": 1.0832
+        },
+        {
+          "decile": 9,
+          "n": 365,
+          "mean_predicted": 3831.53,
+          "mean_actual": 3554.54,
+          "ratio": 1.0779
+        },
+        {
+          "decile": 10,
+          "n": 365,
+          "mean_predicted": 3831.53,
+          "mean_actual": 4089.63,
+          "ratio": 0.9369
+        }
+      ]
+    },
+    {
+      "model": "ridge",
+      "spearman_rank_correlation": 0.3476,
+      "top_decile_lift": 1.834,
+      "r2": 0.1254,
+      "mae": 2603.11,
+      "calibration_slope": 1.0418,
+      "calibration_intercept": -130.88,
+      "well_calibrated": true,
+      "aggregate_payment_error_pct": -0.735,
+      "calibration_by_decile": [
+        {
+          "decile": 1,
+          "n": 366,
+          "mean_predicted": 2456.61,
+          "mean_actual": 2631.85,
+          "ratio": 0.9334
+        },
+        {
+          "decile": 2,
+          "n": 366,
+          "mean_predicted": 2676.62,
+          "mean_actual": 2718.2,
+          "ratio": 0.9847
+        },
+        {
+          "decile": 3,
+          "n": 366,
+          "mean_predicted": 2829.67,
+          "mean_actual": 3068.93,
+          "ratio": 0.922
+        },
+        {
+          "decile": 4,
+          "n": 366,
+          "mean_predicted": 2974.12,
+          "mean_actual": 2907.64,
+          "ratio": 1.0229
+        },
+        {
+          "decile": 5,
+          "n": 366,
+          "mean_predicted": 3143.13,
+          "mean_actual": 2800.01,
+          "ratio": 1.1225
+        },
+        {
+          "decile": 6,
+          "n": 365,
+          "mean_predicted": 3371.0,
+          "mean_actual": 3280.2,
+          "ratio": 1.0277
+        },
+        {
+          "decile": 7,
+          "n": 365,
+          "mean_predicted": 3866.14,
+          "mean_actual": 3961.99,
+          "ratio": 0.9758
+        },
+        {
+          "decile": 8,
+          "n": 365,
+          "mean_predicted": 4669.46,
+          "mean_actual": 4504.87,
+          "ratio": 1.0365
+        },
+        {
+          "decile": 9,
+          "n": 365,
+          "mean_predicted": 5161.0,
+          "mean_actual": 5433.08,
+          "ratio": 0.9499
+        },
+        {
+          "decile": 10,
+          "n": 365,
+          "mean_predicted": 6925.14,
+          "mean_actual": 7048.37,
+          "ratio": 0.9825
+        }
+      ]
+    },
+    {
+      "model": "gradient_boosting",
+      "spearman_rank_correlation": 0.3376,
+      "top_decile_lift": 1.827,
+      "r2": 0.1127,
+      "mae": 2618.9,
+      "calibration_slope": 0.967,
+      "calibration_intercept": 148.24,
+      "well_calibrated": true,
+      "aggregate_payment_error_pct": -0.587,
+      "calibration_by_decile": [
+        {
+          "decile": 1,
+          "n": 366,
+          "mean_predicted": 2531.83,
+          "mean_actual": 2786.91,
+          "ratio": 0.9085
+        },
+        {
+          "decile": 2,
+          "n": 366,
+          "mean_predicted": 2732.63,
+          "mean_actual": 2562.86,
+          "ratio": 1.0662
+        },
+        {
+          "decile": 3,
+          "n": 366,
+          "mean_predicted": 2848.14,
+          "mean_actual": 3032.45,
+          "ratio": 0.9392
+        },
+        {
+          "decile": 4,
+          "n": 366,
+          "mean_predicted": 2953.13,
+          "mean_actual": 3032.58,
+          "ratio": 0.9738
+        },
+        {
+          "decile": 5,
+          "n": 366,
+          "mean_predicted": 3075.17,
+          "mean_actual": 2653.84,
+          "ratio": 1.1588
+        },
+        {
+          "decile": 6,
+          "n": 365,
+          "mean_predicted": 3290.27,
+          "mean_actual": 3351.33,
+          "ratio": 0.9818
+        },
+        {
+          "decile": 7,
+          "n": 365,
+          "mean_predicted": 3995.3,
+          "mean_actual": 4119.21,
+          "ratio": 0.9699
+        },
+        {
+          "decile": 8,
+          "n": 365,
+          "mean_predicted": 4618.07,
+          "mean_actual": 4633.99,
+          "ratio": 0.9966
+        },
+        {
+          "decile": 9,
+          "n": 365,
+          "mean_predicted": 5084.5,
+          "mean_actual": 5160.99,
+          "ratio": 0.9852
+        },
+        {
+          "decile": 10,
+          "n": 365,
+          "mean_predicted": 7000.71,
+          "mean_actual": 7021.13,
+          "ratio": 0.9971
+        }
+      ]
+    }
+  ],
+  "fairness": {
+    "null_proxy": "zip_deprivation_index",
+    "true_effect_on_cost": 0.0,
+    "gbm_r2_with_proxy": 0.1127,
+    "gbm_r2_without_proxy": 0.1142,
+    "r2_cost_of_removing_it": -0.0015,
+    "prediction_parity_by_region": {
+      "Central": {
+        "n": 1940,
+        "mean_predicted": 3729.97,
+        "mean_actual": 3837.48,
+        "prediction_ratio": 0.972
+      },
+      "East": {
+        "n": 2312,
+        "mean_predicted": 3879.47,
+        "mean_actual": 4205.97,
+        "prediction_ratio": 0.9224
+      },
+      "North": {
+        "n": 3063,
+        "mean_predicted": 3911.79,
+        "mean_actual": 3687.55,
+        "prediction_ratio": 1.0608
+      },
+      "South": {
+        "n": 2494,
+        "mean_predicted": 3706.53,
+        "mean_actual": 3669.94,
+        "prediction_ratio": 1.01
+      },
+      "West": {
+        "n": 2374,
+        "mean_predicted": 3864.97,
+        "mean_actual": 3821.53,
+        "prediction_ratio": 1.0114
+      }
+    },
+    "max_min_prediction_ratio": 1.15,
+    "verdict": "the proxy has zero true effect by construction; the measured cost of removing it is the number that decides whether keeping it was ever justified"
+  },
+  "injected_truth": {
+    "risk_coeffs": {
+      "age_band": 0.052,
+      "chronic_count": 0.61,
+      "prior_year_cost_log": 0.48,
+      "inpatient_prior": 0.39
+    }
+  },
+  "finding": "Ranking and pricing are different jobs. ridge reaches Spearman 0.348 with a top-decile lift of 1.83x, so it orders members well. Its calibration slope is 1.042: within tolerance, so the ranking can be priced directly. Aggregate payment error is -0.73%. Removing the zero-effect proxy costs -0.00150 R-squared, which is the entire case for keeping it."
+}

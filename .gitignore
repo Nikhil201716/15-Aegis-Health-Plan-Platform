@@ -1,0 +1,39 @@
+# Generated data and artifacts.
+#
+# Every dataset in this repo is produced by a seeded generator and is
+# verified reproducible by checksum in a fresh process, so committing it
+# would add tens of megabytes to say something the code already says.
+data/
+database/
+artifacts/
+models/
+*.duckdb
+*.db
+*.sqlite
+*.parquet
+*.npy
+*.pt
+*.safetensors
+*.bin
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.hypothesis/
+.pytest_cache/
+*.egg-info/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Logs
+*.log
+
+# Reports ARE tracked: they hold the numbers the READMEs cite.
+!reports/
+!reports/*.json

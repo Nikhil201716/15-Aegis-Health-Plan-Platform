@@ -1,0 +1,109 @@
+{
+  "scope": {
+    "professional_claim_lines": 124508,
+    "providers_with_enough_volume": 900,
+    "min_claims_to_score": 40,
+    "why_a_volume_floor": "a provider with a handful of claims has a mean intensity that is noise; flagging them generates false positives an investigator cannot act on"
+  },
+  "signals": {
+    "peer_intensity": "z > 2.5 WITHIN specialty",
+    "top_code_share": "z > 2.5 on share of top-two codes",
+    "impossible_day": "> 600 billed minutes in a day"
+  },
+  "baseline": {
+    "scenario": "baseline (adversary unaware)",
+    "providers_scored": 900,
+    "fraud_in_scope": 22,
+    "flagged": 23,
+    "true_positives": 21,
+    "false_positives": 2,
+    "false_negatives": 1,
+    "true_negatives": 876,
+    "precision": 0.913,
+    "recall": 0.9545,
+    "f1": 0.9333,
+    "rule_hits": {
+      "peer_intensity": 22,
+      "top_code_share": 20,
+      "impossible_day": 0
+    }
+  },
+  "red_team": [
+    {
+      "scenario": "reduced_rate",
+      "providers_scored": 900,
+      "fraud_in_scope": 22,
+      "flagged": 7,
+      "true_positives": 4,
+      "false_positives": 3,
+      "false_negatives": 18,
+      "true_negatives": 875,
+      "precision": 0.5714,
+      "recall": 0.1818,
+      "f1": 0.2759,
+      "rule_hits": {
+        "peer_intensity": 5,
+        "top_code_share": 7,
+        "impossible_day": 0
+      },
+      "description": "upcode 15% of claims instead of 42%",
+      "recall_drop_vs_baseline": 0.7727
+    },
+    {
+      "scenario": "stay_below_threshold",
+      "providers_scored": 900,
+      "fraud_in_scope": 22,
+      "flagged": 19,
+      "true_positives": 17,
+      "false_positives": 2,
+      "false_negatives": 5,
+      "true_negatives": 876,
+      "precision": 0.8947,
+      "recall": 0.7727,
+      "f1": 0.8293,
+      "rule_hits": {
+        "peer_intensity": 16,
+        "top_code_share": 19,
+        "impossible_day": 0
+      },
+      "description": "never bill the top code",
+      "recall_drop_vs_baseline": 0.1818
+    },
+    {
+      "scenario": "spread_thin",
+      "providers_scored": 900,
+      "fraud_in_scope": 22,
+      "flagged": 14,
+      "true_positives": 11,
+      "false_positives": 3,
+      "false_negatives": 11,
+      "true_negatives": 875,
+      "precision": 0.7857,
+      "recall": 0.5,
+      "f1": 0.6111,
+      "rule_hits": {
+        "peer_intensity": 12,
+        "top_code_share": 14,
+        "impossible_day": 0
+      },
+      "description": "half the ring stops; the rest carry on",
+      "recall_drop_vs_baseline": 0.4545
+    }
+  ],
+  "dead_rule": {
+    "rule": "impossible_day",
+    "hits": 0,
+    "verdict": "this rule never fires on this book and contributes nothing to the reported precision or recall. It is recorded rather than quietly left in the list, because a three-signal detector where one signal is inert is a two-signal detector, and the threshold (600 min/day) is calibrated for a billing pattern this generator does not produce. Either recalibrate it against real claim volumes or drop it - do not let it pad the rule count."
+  },
+  "worst_case": {
+    "strategy": "reduced_rate",
+    "recall": 0.1818,
+    "recall_drop": 0.7727
+  },
+  "injected_truth": {
+    "n_fraud_providers": 22,
+    "upcode_shift": 0.42,
+    "note": "is_fraud and true_em_code are used ONLY to score"
+  },
+  "finding": "Against an adversary who does not know the rules, the detector reaches 95% recall at 91% precision. That number is the least informative one in this report. Once the thresholds are known, the cheapest possible evasion - 'reduced_rate' - takes recall to 18%, a drop of 77%, with no change to the detector at all. A fraud control's honest strength is its strength under adaptation, and reporting the unattacked number alone overstates it by exactly that margin."
+}

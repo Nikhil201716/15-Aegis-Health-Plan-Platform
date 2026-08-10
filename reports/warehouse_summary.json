@@ -1,0 +1,27 @@
+{
+  "grain": {
+    "dim_member": "one row per member",
+    "dim_provider": "one row per provider (NPI)",
+    "fct_enrollment_span": "one row per member (their single enrolment span)",
+    "fct_claim_line": "one row per adjudicated claim LINE",
+    "vw_member_month": "one row per member per enrolled month - the conformed grain every ratio metric is defined against",
+    "vw_provider_coding": "one row per provider per month, professional claims only"
+  },
+  "row_counts": {
+    "dim_member": 24000,
+    "dim_provider": 900,
+    "fct_claim_line": 367313,
+    "fct_enrollment_span": 24000,
+    "vw_member_month": 266329,
+    "vw_provider_coding": 20309
+  },
+  "idempotent_rebuild": true,
+  "member_month_fanout_check": {
+    "expected_from_spans": 266329,
+    "actual_in_view": 266329,
+    "matches": true,
+    "why": "if these diverge a join has fanned out and every ratio metric has gained denominator rows that do not exist"
+  },
+  "member_months_with_zero_claims": 0.2784,
+  "note": "the month spine keeps zero-claim member-months in the denominator; dropping them turns PMPM into 'average cost among members who claimed', which is a different and much larger number"
+}

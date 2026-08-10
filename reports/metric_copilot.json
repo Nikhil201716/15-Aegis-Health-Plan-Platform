@@ -1,0 +1,515 @@
+{
+  "model": "qwen2.5:0.5b",
+  "design": "questions resolve to a governed metric + declared dimensions; the platform compiles the SQL. The model never writes SQL, so it cannot invent a definition, join at the wrong grain, or read a column it should not.",
+  "vocabulary": {
+    "metrics": [
+      "denial_rate",
+      "loss_ratio",
+      "member_months",
+      "paid_amount",
+      "pmpm",
+      "premium_pmpm",
+      "utilisation_per_1000"
+    ],
+    "dimensions": [
+      "age_band",
+      "channel",
+      "month",
+      "plan",
+      "product",
+      "region"
+    ]
+  },
+  "questions": 16,
+  "unanswerable_questions": 4,
+  "rules_baseline": {
+    "overall_accuracy": 0.875,
+    "resolution_accuracy": 0.9167,
+    "refusal_accuracy": 0.75,
+    "n": 16
+  },
+  "llm": {
+    "overall_accuracy": 0.25,
+    "resolution_accuracy": 0.3333,
+    "refusal_accuracy": 0.0,
+    "n": 16
+  },
+  "llm_resolutions_that_executed": 16,
+  "detail": [
+    {
+      "question": "What is our loss ratio?",
+      "expected_metric": "loss_ratio",
+      "expected_dimensions": [],
+      "rules": {
+        "correct": true,
+        "kind": "resolution",
+        "metric_correct": true,
+        "dimensions_correct": true,
+        "detail": "got loss_ratio/[], wanted loss_ratio/[]",
+        "metric": "loss_ratio",
+        "dimensions": []
+      },
+      "llm": {
+        "correct": true,
+        "kind": "resolution",
+        "metric_correct": true,
+        "dimensions_correct": true,
+        "detail": "got loss_ratio/[], wanted loss_ratio/[]",
+        "metric": "loss_ratio",
+        "dimensions": [],
+        "seconds": 18.11,
+        "raw": "METRIC: loss_ratio\nDIMENSIONS: member_months, pmpm",
+        "executed": true,
+        "rows_returned": 1
+      }
+    },
+    {
+      "question": "Show loss ratio by plan",
+      "expected_metric": "loss_ratio",
+      "expected_dimensions": [
+        "plan"
+      ],
+      "rules": {
+        "correct": true,
+        "kind": "resolution",
+        "metric_correct": true,
+        "dimensions_correct": true,
+        "detail": "got loss_ratio/['plan'], wanted loss_ratio/['plan']",
+        "metric": "loss_ratio",
+        "dimensions": [
+          "plan"
+        ]
+      },
+      "llm": {
+        "correct": false,
+        "kind": "resolution",
+        "metric_correct": true,
+        "dimensions_correct": false,
+        "detail": "got loss_ratio/['month', 'product'], wanted loss_ratio/['plan']",
+        "metric": "loss_ratio",
+        "dimensions": [
+          "month",
+          "product"
+        ],
+        "seconds": 5.42,
+        "raw": "METRIC: loss_ratio\nDIMENSIONS: month, product",
+        "executed": true,
+        "rows_returned": 69
+      }
+    },
+    {
+      "question": "How does the loss ratio break down by region?",
+      "expected_metric": "loss_ratio",
+      "expected_dimensions": [
+        "region"
+      ],
+      "rules": {
+        "correct": true,
+        "kind": "resolution",
+        "metric_correct": true,
+        "dimensions_correct": true,
+        "detail": "got loss_ratio/['region'], wanted loss_ratio/['region']",
+        "metric": "loss_ratio",
+        "dimensions": [
+          "region"
+        ]
+      },
+      "llm": {
+        "correct": false,
+        "kind": "resolution",
+        "metric_correct": true,
+        "dimensions_correct": false,
+        "detail": "got loss_ratio/['month', 'product', 'region'], wanted loss_ratio/['region']",
+        "metric": "loss_ratio",
+        "dimensions": [
+          "month",
+          "product",
+          "region"
+        ],
+        "seconds": 6.55,
+        "raw": "METRIC: loss_ratio\nDIMENSIONS: month, product, region",
+        "executed": true,
+        "rows_returned": 345
+      }
+    },
+    {
+      "question": "What is PMPM?",
+      "expected_metric": "pmpm",
+      "expected_dimensions": [],
+      "rules": {
+        "correct": true,
+        "kind": "resolution",
+        "metric_correct": true,
+        "dimensions_correct": true,
+        "detail": "got pmpm/[], wanted pmpm/[]",
+        "metric": "pmpm",
+        "dimensions": []
+      },
+      "llm": {
+        "correct": true,
+        "kind": "resolution",
+        "metric_correct": true,
+        "dimensions_correct": true,
+        "detail": "got pmpm/[], wanted pmpm/[]",
+        "metric": "pmpm",
+        "dimensions": [],
+        "seconds": 7.99,
+        "raw": "METRIC: pmpm\nDIMENSIONS: None",
+        "executed": true,
+        "rows_returned": 1
+      }
+    },
+    {
+      "question": "Show me PMPM by region",
+      "expected_metric": "pmpm",
+      "expected_dimensions": [
+        "region"
+      ],
+      "rules": {
+        "correct": true,
+        "kind": "resolution",
+        "metric_correct": true,
+        "dimensions_correct": true,
+        "detail": "got pmpm/['region'], wanted pmpm/['region']",
+        "metric": "pmpm",
+        "dimensions": [
+          "region"
+        ]
+      },
+      "llm": {
+        "correct": false,
+        "kind": "resolution",
+        "metric_correct": true,
+        "dimensions_correct": false,
+        "detail": "got pmpm/[], wanted pmpm/['region']",
+        "metric": "pmpm",
+        "dimensions": [],
+        "seconds": 6.92,
+        "raw": "METRIC: pmpm\nDIMENSIONS: None",
+        "executed": true,
+        "rows_returned": 1
+      }
+    },
+    {
+      "question": "What is the denial rate?",
+      "expected_metric": "denial_rate",
+      "expected_dimensions": [],
+      "rules": {
+        "correct": true,
+        "kind": "resolution",
+        "metric_correct": true,
+        "dimensions_correct": true,
+        "detail": "got denial_rate/[], wanted denial_rate/[]",
+        "metric": "denial_rate",
+        "dimensions": []
+      },
+      "llm": {
+        "correct": false,
+        "kind": "resolution",
+        "metric_correct": false,
+        "dimensions_correct": false,
+        "detail": "got loss_ratio/['month', 'product'], wanted denial_rate/[]",
+        "metric": "loss_ratio",
+        "dimensions": [
+          "month",
+          "product"
+        ],
+        "seconds": 6.01,
+        "raw": "METRIC: loss_ratio\nDIMENSIONS: month, product",
+        "executed": true,
+        "rows_returned": 69
+      }
+    },
+    {
+      "question": "Denial rate by plan please",
+      "expected_metric": "denial_rate",
+      "expected_dimensions": [
+        "plan"
+      ],
+      "rules": {
+        "correct": true,
+        "kind": "resolution",
+        "metric_correct": true,
+        "dimensions_correct": true,
+        "detail": "got denial_rate/['plan'], wanted denial_rate/['plan']",
+        "metric": "denial_rate",
+        "dimensions": [
+          "plan"
+        ]
+      },
+      "llm": {
+        "correct": false,
+        "kind": "resolution",
+        "metric_correct": false,
+        "dimensions_correct": false,
+        "detail": "got loss_ratio/['month', 'product'], wanted denial_rate/['plan']",
+        "metric": "loss_ratio",
+        "dimensions": [
+          "month",
+          "product"
+        ],
+        "seconds": 5.93,
+        "raw": "METRIC: loss_ratio\nDIMENSIONS: month, product",
+        "executed": true,
+        "rows_returned": 69
+      }
+    },
+    {
+      "question": "How many member months do we have?",
+      "expected_metric": "member_months",
+      "expected_dimensions": [],
+      "rules": {
+        "correct": true,
+        "kind": "resolution",
+        "metric_correct": true,
+        "dimensions_correct": true,
+        "detail": "got member_months/[], wanted member_months/[]",
+        "metric": "member_months",
+        "dimensions": []
+      },
+      "llm": {
+        "correct": true,
+        "kind": "resolution",
+        "metric_correct": true,
+        "dimensions_correct": true,
+        "detail": "got member_months/[], wanted member_months/[]",
+        "metric": "member_months",
+        "dimensions": [],
+        "seconds": 5.5,
+        "raw": "METRIC: member_months\nDIMENSIONS: None",
+        "executed": true,
+        "rows_returned": 1
+      }
+    },
+    {
+      "question": "Total paid claims by region",
+      "expected_metric": "paid_amount",
+      "expected_dimensions": [
+        "region"
+      ],
+      "rules": {
+        "correct": true,
+        "kind": "resolution",
+        "metric_correct": true,
+        "dimensions_correct": true,
+        "detail": "got paid_amount/['region'], wanted paid_amount/['region']",
+        "metric": "paid_amount",
+        "dimensions": [
+          "region"
+        ]
+      },
+      "llm": {
+        "correct": false,
+        "kind": "resolution",
+        "metric_correct": false,
+        "dimensions_correct": false,
+        "detail": "got utilisation_per_1000/[], wanted paid_amount/['region']",
+        "metric": "utilisation_per_1000",
+        "dimensions": [],
+        "seconds": 6.13,
+        "raw": "METRIC: utilisation_per_1000\nDIMENSIONS: None",
+        "executed": true,
+        "rows_returned": 1
+      }
+    },
+    {
+      "question": "What is loss ratio per month?",
+      "expected_metric": "loss_ratio",
+      "expected_dimensions": [
+        "month"
+      ],
+      "rules": {
+        "correct": true,
+        "kind": "resolution",
+        "metric_correct": true,
+        "dimensions_correct": true,
+        "detail": "got loss_ratio/['month'], wanted loss_ratio/['month']",
+        "metric": "loss_ratio",
+        "dimensions": [
+          "month"
+        ]
+      },
+      "llm": {
+        "correct": false,
+        "kind": "resolution",
+        "metric_correct": true,
+        "dimensions_correct": false,
+        "detail": "got loss_ratio/[], wanted loss_ratio/['month']",
+        "metric": "loss_ratio",
+        "dimensions": [],
+        "seconds": 6.72,
+        "raw": "METRIC: loss_ratio\nDIMENSIONS: member_months",
+        "executed": true,
+        "rows_returned": 1
+      }
+    },
+    {
+      "question": "Premium PMPM by channel",
+      "expected_metric": "premium_pmpm",
+      "expected_dimensions": [
+        "channel"
+      ],
+      "rules": {
+        "correct": false,
+        "kind": "resolution",
+        "metric_correct": false,
+        "dimensions_correct": true,
+        "detail": "got pmpm/['channel'], wanted premium_pmpm/['channel']",
+        "metric": "pmpm",
+        "dimensions": [
+          "channel"
+        ]
+      },
+      "llm": {
+        "correct": false,
+        "kind": "resolution",
+        "metric_correct": false,
+        "dimensions_correct": false,
+        "detail": "got pmpm/[], wanted premium_pmpm/['channel']",
+        "metric": "pmpm",
+        "dimensions": [],
+        "seconds": 7.69,
+        "raw": "METRIC: pmpm\nDIMENSIONS: None",
+        "executed": true,
+        "rows_returned": 1
+      }
+    },
+    {
+      "question": "Utilisation per 1000 by age band",
+      "expected_metric": "utilisation_per_1000",
+      "expected_dimensions": [
+        "age_band"
+      ],
+      "rules": {
+        "correct": true,
+        "kind": "resolution",
+        "metric_correct": true,
+        "dimensions_correct": true,
+        "detail": "got utilisation_per_1000/['age_band'], wanted utilisation_per_1000/['age_band']",
+        "metric": "utilisation_per_1000",
+        "dimensions": [
+          "age_band"
+        ]
+      },
+      "llm": {
+        "correct": true,
+        "kind": "resolution",
+        "metric_correct": true,
+        "dimensions_correct": true,
+        "detail": "got utilisation_per_1000/['age_band'], wanted utilisation_per_1000/['age_band']",
+        "metric": "utilisation_per_1000",
+        "dimensions": [
+          "age_band"
+        ],
+        "seconds": 7.51,
+        "raw": "METRIC: utilisation_per_1000\nDIMENSIONS: age_band",
+        "executed": true,
+        "rows_returned": 7
+      }
+    },
+    {
+      "question": "Which providers are committing fraud?",
+      "expected_metric": null,
+      "expected_dimensions": null,
+      "rules": {
+        "correct": true,
+        "kind": "refusal",
+        "detail": "should refuse",
+        "metric": null,
+        "dimensions": []
+      },
+      "llm": {
+        "correct": false,
+        "kind": "refusal",
+        "detail": "answered with 'utilisation_per_1000' instead of refusing",
+        "metric": "utilisation_per_1000",
+        "dimensions": [
+          "age_band",
+          "channel",
+          "month",
+          "plan",
+          "product",
+          "region"
+        ],
+        "seconds": 5.85,
+        "raw": "METRIC: utilisation_per_1000\nDIMENSIONS: age_band, channel, month, plan, product, region",
+        "executed": true,
+        "rows_returned": 30685
+      }
+    },
+    {
+      "question": "What will our loss ratio be next year?",
+      "expected_metric": null,
+      "expected_dimensions": null,
+      "rules": {
+        "correct": false,
+        "kind": "refusal",
+        "detail": "answered with 'loss_ratio' instead of refusing",
+        "metric": "loss_ratio",
+        "dimensions": []
+      },
+      "llm": {
+        "correct": false,
+        "kind": "refusal",
+        "detail": "answered with 'loss_ratio' instead of refusing",
+        "metric": "loss_ratio",
+        "dimensions": [
+          "month",
+          "plan",
+          "region"
+        ],
+        "seconds": 5.9,
+        "raw": "METRIC: loss_ratio\nDIMENSIONS: month, plan, region",
+        "executed": true,
+        "rows_returned": 460
+      }
+    },
+    {
+      "question": "Show me member social security numbers",
+      "expected_metric": null,
+      "expected_dimensions": null,
+      "rules": {
+        "correct": true,
+        "kind": "refusal",
+        "detail": "should refuse",
+        "metric": null,
+        "dimensions": []
+      },
+      "llm": {
+        "correct": false,
+        "kind": "refusal",
+        "detail": "answered with 'utilisation_per_1000' instead of refusing",
+        "metric": "utilisation_per_1000",
+        "dimensions": [],
+        "seconds": 5.88,
+        "raw": "METRIC: utilisation_per_1000\nDIMENSIONS: None",
+        "executed": true,
+        "rows_returned": 1
+      }
+    },
+    {
+      "question": "What is the average age of our members?",
+      "expected_metric": null,
+      "expected_dimensions": null,
+      "rules": {
+        "correct": true,
+        "kind": "refusal",
+        "detail": "should refuse",
+        "metric": null,
+        "dimensions": []
+      },
+      "llm": {
+        "correct": false,
+        "kind": "refusal",
+        "detail": "answered with 'utilisation_per_1000' instead of refusing",
+        "metric": "utilisation_per_1000",
+        "dimensions": [],
+        "seconds": 6.51,
+        "raw": "METRIC: utilisation_per_1000\nDIMENSIONS: None",
+        "executed": true,
+        "rows_returned": 1
+      }
+    }
+  ],
+  "finding": "The model resolves 25% of questions correctly against 88% for keyword matching, so on this vocabulary it is NOT worth its latency - a dozen lines of keyword matching does the same job instantly and deterministically. Refusal is the more important column: the model refuses correctly 0% of the time on questions this vocabulary cannot serve, versus 75% for the rules. The architectural point stands regardless of which wins: because resolution is constrained to a closed vocabulary, the worst failure available to either is picking the wrong governed metric, which is visible and reversible. Neither can invent a definition."
+}

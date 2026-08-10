@@ -1,0 +1,106 @@
+{
+  "target": "PMPM (paid per member per month)",
+  "why_pmpm": "total cost confounds price with membership; this book shrinks as members lapse, so a forecaster trained on totals would project the shrinkage as a cost improvement",
+  "hierarchy": {
+    "leaves": 15,
+    "series_total": 24,
+    "levels": [
+      "total",
+      "region",
+      "product",
+      "leaf"
+    ]
+  },
+  "train_months": 17,
+  "holdout_months": 6,
+  "forward_filled_gaps": 0,
+  "base_forecast_incoherence": {
+    "absolute": 690.5999,
+    "pct_of_forecast": 0.4857,
+    "meaning": "independently produced forecasts do not add up; this is the gap between the regional numbers and the total in the same board pack"
+  },
+  "results": [
+    {
+      "approach": "base_independent",
+      "mape_pct_overall": 13.479,
+      "mape_pct_by_level": {
+        "total": 4.27,
+        "region": 7.456,
+        "product": 10.589,
+        "leaf": 16.679
+      },
+      "rmse": 132.269,
+      "incoherence": 690.599868,
+      "is_coherent": false
+    },
+    {
+      "approach": "bottom_up",
+      "mape_pct_overall": 13.341,
+      "mape_pct_by_level": {
+        "total": 4.259,
+        "region": 7.438,
+        "product": 9.519,
+        "leaf": 16.679
+      },
+      "rmse": 128.63,
+      "incoherence": 0.0,
+      "is_coherent": true
+    },
+    {
+      "approach": "top_down",
+      "mape_pct_overall": 9.545,
+      "mape_pct_by_level": {
+        "total": 4.27,
+        "region": 6.934,
+        "product": 5.935,
+        "leaf": 11.489
+      },
+      "rmse": 99.445,
+      "incoherence": 0.0,
+      "is_coherent": true
+    },
+    {
+      "approach": "ols_reconciled",
+      "mape_pct_overall": 13.568,
+      "mape_pct_by_level": {
+        "total": 4.338,
+        "region": 7.395,
+        "product": 9.989,
+        "leaf": 16.956
+      },
+      "rmse": 131.889,
+      "incoherence": 0.0,
+      "is_coherent": true
+    },
+    {
+      "approach": "mint_diagonal",
+      "mape_pct_overall": 13.586,
+      "mape_pct_by_level": {
+        "total": 4.345,
+        "region": 7.505,
+        "product": 9.876,
+        "leaf": 16.971
+      },
+      "rmse": 131.473,
+      "incoherence": 0.0,
+      "is_coherent": true
+    }
+  ],
+  "best_approach": "top_down",
+  "injected_truth": {
+    "region_monthly_trend": {
+      "North": 0.0042,
+      "South": 0.0031,
+      "East": 0.0068,
+      "West": 0.0025,
+      "Central": 0.0049
+    },
+    "seasonal_amplitude": 0.11,
+    "level_shift": {
+      "region": "East",
+      "month": 15,
+      "size": 0.14
+    }
+  },
+  "finding": "Base forecasts are incoherent by 0.49% of their own magnitude. Every reconciliation method fixes that exactly. On ACCURACY the picture is narrower than the textbook claim: 2 of 4 methods beat the unreconciled base, and the best is top_down at 9.545% MAPE versus 13.479%. Coherence is guaranteed; an accuracy gain is not, and is reported here as measured. The ranking contradicts the usual expectation that MinT wins. It loses here, slightly, and the reason is visible in the by-level MAPE: the leaves run near 17% error while the total runs near 4%. With only 15 region-product cells over a shrinking book, each leaf carries few member-months and is genuinely noisy, so any method that gives leaf forecasts weight inherits that noise. Top-down pushes the one stable series downward and wins. That is a property of THIS hierarchy - a wide, well-populated one would likely reverse it - which is the argument for measuring reconciliation on your own data rather than adopting the method the literature reports as best on retail series."
+}

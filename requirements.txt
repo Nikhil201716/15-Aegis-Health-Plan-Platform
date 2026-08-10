@@ -1,0 +1,17 @@
+# Aegis Health Plan Intelligence Platform
+#
+# All free and local. Ollama (qwen2.5:0.5b) is a separate install and is
+# needed only for the metric copilot stage; the keyword-rules baseline
+# answers without it.
+
+duckdb>=1.0
+pandas>=2.2
+numpy>=1.26
+scipy>=1.11
+scikit-learn>=1.4
+
+fastapi>=0.110
+uvicorn>=0.29
+
+pytest>=8.0
+hypothesis>=6.98
