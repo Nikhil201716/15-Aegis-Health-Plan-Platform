@@ -219,23 +219,10 @@
   },
   "injected_bugs": {
     "injected": 10,
-    "caught": 7,
-    "survived": 3,
-    "detection_rate": 0.7,
-    "survivors": [
-      {
-        "bug": "km_wrong_risk_set",
-        "breaks": "the at-risk denominator never shrinks"
-      },
-      {
-        "bug": "member_month_spine_dropped",
-        "breaks": "zero-claim member-months vanish, inflating PMPM"
-      },
-      {
-        "bug": "denominator_fanout",
-        "breaks": "exposure join fans out, adding member-months that never existed"
-      }
-    ],
+    "caught": 10,
+    "survived": 0,
+    "detection_rate": 1.0,
+    "survivors": [],
     "stale": 0,
     "detail": [
       {
@@ -245,7 +232,7 @@
         "breaks": "loss ratio computed upside down",
         "caught": true,
         "exit_code": 1,
-        "evidence": "1 failed, 5 passed in 14.22s"
+        "evidence": "1 failed, 5 passed in 17.07s"
       },
       {
         "bug": "duplicate_metric_allowed",
@@ -254,7 +241,7 @@
         "breaks": "a metric can be silently redefined, defeating the whole layer",
         "caught": true,
         "exit_code": 2,
-        "evidence": "1 error in 2.50s"
+        "evidence": "1 error in 2.15s"
       },
       {
         "bug": "unknown_dimension_ignored",
@@ -263,7 +250,7 @@
         "breaks": "an undeclared dimension is silently dropped instead of rejected",
         "caught": true,
         "exit_code": 1,
-        "evidence": "1 failed in 13.02s"
+        "evidence": "1 failed in 11.00s"
       },
       {
         "bug": "km_ignores_censoring",
@@ -272,16 +259,16 @@
         "breaks": "Kaplan-Meier treats censored members as events",
         "caught": true,
         "exit_code": 1,
-        "evidence": "1 failed, 14 passed in 15.06s"
+        "evidence": "1 failed, 14 passed in 17.76s"
       },
       {
         "bug": "km_wrong_risk_set",
         "file": "analytics/survival/member_survival.py",
         "applied": true,
         "breaks": "the at-risk denominator never shrinks",
-        "caught": false,
-        "exit_code": 0,
-        "evidence": "21 passed in 12.54s"
+        "caught": true,
+        "exit_code": 1,
+        "evidence": "1 failed, 16 passed in 17.58s"
       },
       {
         "bug": "cox_drops_censored_from_risk_set",
@@ -290,7 +277,7 @@
         "breaks": "Breslow ties handled wrong, so tied event times use different risk sets",
         "caught": true,
         "exit_code": 1,
-        "evidence": "1 failed, 18 passed in 15.78s"
+        "evidence": "1 failed, 18 passed in 16.66s"
       },
       {
         "bug": "month_off_by_one",
@@ -299,7 +286,7 @@
         "breaks": "month labels shift by one, silently misdating every report",
         "caught": true,
         "exit_code": 1,
-        "evidence": "1 failed, 11 passed in 18.78s"
+        "evidence": "1 failed, 11 passed in 23.77s"
       },
       {
         "bug": "em_intensity_unordered",
@@ -308,25 +295,25 @@
         "breaks": "coding intensity order scrambled, so upcoding z-scores are meaningless",
         "caught": true,
         "exit_code": 1,
-        "evidence": "1 failed, 20 passed in 14.16s"
+        "evidence": "1 failed, 20 passed in 20.72s"
       },
       {
         "bug": "member_month_spine_dropped",
         "file": "platform/warehouse/build_warehouse.py",
         "applied": true,
         "breaks": "zero-claim member-months vanish, inflating PMPM",
-        "caught": false,
-        "exit_code": 0,
-        "evidence": "21 passed in 13.07s"
+        "caught": true,
+        "exit_code": 1,
+        "evidence": "1 failed, 7 passed in 19.01s"
       },
       {
         "bug": "denominator_fanout",
         "file": "platform/warehouse/build_warehouse.py",
         "applied": true,
         "breaks": "exposure join fans out, adding member-months that never existed",
-        "caught": false,
-        "exit_code": 0,
-        "evidence": "21 passed in 16.13s"
+        "caught": true,
+        "exit_code": 1,
+        "evidence": "1 failed, 7 passed in 22.85s"
       }
     ]
   }
